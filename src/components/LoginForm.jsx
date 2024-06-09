@@ -10,6 +10,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 
 const LoginForm = () => {
@@ -47,13 +48,13 @@ const LoginForm = () => {
         <FormHeader>
           <h1>Sign In</h1>
           <p>
-            Dosn&lsquo;t have an account ? <a>Sign Up</a>
+            Dosn&lsquo;t have an account ? <Link to="register">Sign Up</Link>
           </p>
         </FormHeader>
         <Form onSubmit={handleOnSubmit}>
           <TextField
             required
-            id="outlined-required"
+            id="outlined-required email"
             label="Email"
             color="secondary"
             name="Email"
@@ -63,7 +64,7 @@ const LoginForm = () => {
           <div>
             <TextField
               required
-              id="outlined-required"
+              id="outlined-required password"
               label="Password"
               color="secondary"
               name="Password"
@@ -81,7 +82,7 @@ const LoginForm = () => {
             color="secondary"
             size="large"
           >
-            Submit
+            Login
           </Button>
         </Form>
       </Container>

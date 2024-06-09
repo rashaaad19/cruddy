@@ -15,6 +15,7 @@ export const FormHeader = styled.div`
   a {
     color: #b40db4;
     font-weight: 500;
+    text-decoration: none;
   }
 `;
 export const Form = styled.form`
