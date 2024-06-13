@@ -12,9 +12,10 @@ import { auth } from "../firebase";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-
 const LoginForm = () => {
   const [passwordInvalid, setPasswordInvalid] = useState(false);
+  const [isSuccessful, setIsSuccessful] = useState(false);
+  const [userData, setUserData] = useState(null);
 
   //Form submission handler
   const handleOnSubmit = (event) => {
@@ -33,7 +34,8 @@ const LoginForm = () => {
       };
       signInWithEmailAndPassword(auth, userData.email, userData.password)
         .then((userCredential) => {
-          console.log(userCredential);
+          setUserData(userCredential.user);
+          setIsSuccessful(true);
         })
         .catch((error) => {
           console.log(error.code);
@@ -85,6 +87,7 @@ const LoginForm = () => {
             Login
           </Button>
         </Form>
+        {isSuccessful && <p>Signed In Succesfully welcome {userData.email}</p>}
       </Container>
     </>
   );
