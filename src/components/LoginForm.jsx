@@ -12,11 +12,15 @@ import { auth } from "../firebase";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
+import { useDispatch } from "react-redux";
+import { userAuthActions } from "../store/userAuthSlice";
+
 const LoginForm = () => {
   const [passwordInvalid, setPasswordInvalid] = useState(false);
   const [userData, setUserData] = useState(null);
 
   const navigate = useNavigate();
+  const dispatch=useDispatch();
 
   //Form submission handler
   const handleOnSubmit = async (event) => {
@@ -47,6 +51,8 @@ const LoginForm = () => {
         );
         setUserData(userCredential.user);
 
+        //Set Authentication to true
+        dispatch(userAuthActions.setAuth(true))
         // Navigate to the home page after successful login
         navigate("/home");
       } catch (error) {

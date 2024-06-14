@@ -3,6 +3,7 @@ import "./App.css";
 import LoginForm from "./components/LoginForm";
 import RegisterForm from "./components/RegisterForm";
 import HomePage from "./Pages/HomePage";
+import ProtectedRoute from "./Pages/ProtectedRoute";
 
 function App() {
   //react router initialization
@@ -15,7 +16,17 @@ function App() {
       path: "register",
       element: <RegisterForm />,
     },
-    { path: "home", element: <HomePage /> },
+    // Adding home route as protected route to check authentication each time user opens it
+    {
+      path: "home",
+      element: <ProtectedRoute />,
+      children: [
+        {
+          index: true,
+          element: <HomePage />,
+        },
+      ],
+    },
   ]);
   return (
     <>
