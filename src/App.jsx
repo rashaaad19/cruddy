@@ -2,6 +2,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import "./App.css";
 import LoginForm from "./components/LoginForm";
 import RegisterForm from "./components/RegisterForm";
+import HomePage from "./Pages/HomePage";
 
 function App() {
   //react router initialization
@@ -14,6 +15,7 @@ function App() {
       path: "register",
       element: <RegisterForm />,
     },
+    { path: "home", element: <HomePage /> },
   ]);
   return (
     <>

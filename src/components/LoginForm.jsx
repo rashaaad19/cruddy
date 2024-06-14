@@ -10,37 +10,48 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
   const [passwordInvalid, setPasswordInvalid] = useState(false);
-  const [isSuccessful, setIsSuccessful] = useState(false);
   const [userData, setUserData] = useState(null);
 
+  const navigate = useNavigate();
+
   //Form submission handler
-  const handleOnSubmit = (event) => {
+  const handleOnSubmit = async (event) => {
+    // Extracting form data after submission
     event.preventDefault();
     const data = new FormData(event.target);
     const password = data.get("Password");
+    // Validating the password length
+
     if (password.length < 6) {
       console.log("Password is too short !!");
       setPasswordInvalid(true);
       return;
-    } else {
+    }
+    // After passing the validation assembling data in userData object for easier usage
+    else {
       setPasswordInvalid(false);
       const userData = {
         email: data.get("Email"),
         password: data.get("Password"),
       };
-      signInWithEmailAndPassword(auth, userData.email, userData.password)
-        .then((userCredential) => {
-          setUserData(userCredential.user);
-          setIsSuccessful(true);
-        })
-        .catch((error) => {
-          console.log(error.code);
-        });
-      console.log(userData);
+      // Logging in with firebase auth
+      try {
+        const userCredential = await signInWithEmailAndPassword(
+          auth,
+          userData.email,
+          userData.password
+        );
+        setUserData(userCredential.user);
+
+        // Navigate to the home page after successful login
+        navigate("/home");
+      } catch (error) {
+        console.log(error.code);
+      }
     }
   };
 
@@ -87,7 +98,6 @@ const LoginForm = () => {
             Login
           </Button>
         </Form>
-        {isSuccessful && <p>Signed In Succesfully welcome {userData.email}</p>}
       </Container>
     </>
   );

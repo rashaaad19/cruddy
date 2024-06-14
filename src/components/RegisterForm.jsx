@@ -7,38 +7,60 @@ import {
 } from "./Styled-Components/FormComponents";
 
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../firebase";
+import { collection, doc, setDoc } from "firebase/firestore";
+import { auth, db } from "../firebase";
 
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
+//initializing reference to users collection
+const usersRef = collection(db, "users");
 
 const RegisterForm = () => {
   const [passwordInvalid, setPasswordInvalid] = useState(false);
+  const navigate = useNavigate();
 
-const handleOnSubmit=(event)=>{
+  const handleOnSubmit = async (event) => {
+    // Extracting form data after submission
     event.preventDefault();
     const data = new FormData(event.target);
     const password = data.get("Password");
+    // Validating the password length
     if (password.length < 6) {
       console.log("Password is too short !!");
       setPasswordInvalid(true);
       return;
-    } else {
+    }
+    // After passing the validation assembling data in userData object for easier usage
+    else {
       setPasswordInvalid(false);
       const userData = {
         email: data.get("Email"),
         password: data.get("Password"),
       };
-      createUserWithEmailAndPassword(auth, userData.email, userData.password)
-        .then((userCredential) => {
-          console.log(userCredential);
-        })
-        .catch((error) => {
-          console.log(error.code);
+      // Creating new user with firebase auth
+      try {
+        const userCredential = await createUserWithEmailAndPassword(
+          auth,
+          userData.email,
+          userData.password
+        );
+        const uid = userCredential.user.uid;
+        console.log(userCredential);
+        // Creating unique document in the users collection based on the user id and storing data in it
+        await setDoc(doc(usersRef, uid), {
+          email: userData.email,
+          userID: uid,
         });
-      console.log(userData);
+        // Navigate to home page after signing up
+        navigate('/home')
+
+      } catch (error) {
+        // Catching any errors
+        console.log(error);
+      }
     }
-}
+  };
   return (
     <>
       <Container>
