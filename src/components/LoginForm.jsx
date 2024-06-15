@@ -16,11 +16,14 @@ import { useDispatch } from "react-redux";
 import { userAuthActions } from "../store/userAuthSlice";
 
 const LoginForm = () => {
-  const [passwordInvalid, setPasswordInvalid] = useState(false);
+  const [passwordInvalid, setPasswordInvalid] = useState({
+    invalid: false,
+    errorType: "",
+  });
   const [userData, setUserData] = useState(null);
 
   const navigate = useNavigate();
-  const dispatch=useDispatch();
+  const dispatch = useDispatch();
 
   //Form submission handler
   const handleOnSubmit = async (event) => {
@@ -32,7 +35,7 @@ const LoginForm = () => {
 
     if (password.length < 6) {
       console.log("Password is too short !!");
-      setPasswordInvalid(true);
+      setPasswordInvalid({ invalid: true, errorType: "short" });
       return;
     }
     // After passing the validation assembling data in userData object for easier usage
@@ -52,11 +55,13 @@ const LoginForm = () => {
         setUserData(userCredential.user);
 
         //Set Authentication to true
-        dispatch(userAuthActions.setAuth(true))
+        dispatch(userAuthActions.setAuth(true));
         // Navigate to the home page after successful login
         navigate("/home");
       } catch (error) {
+        //handling errors or incorrect password
         console.log(error.code);
+        setPasswordInvalid({ invalid: true, errorType: "wrong" });
       }
     }
   };
@@ -89,11 +94,20 @@ const LoginForm = () => {
               name="Password"
               type="password"
               fullWidth={true}
-              error={passwordInvalid}
+              error={passwordInvalid.invalid}
             />
-            <PasswordMsg $passwordInvalid={passwordInvalid}>
-              Please enter password that contain more than 6 characters.
-            </PasswordMsg>
+
+            {/* conditionally rendring the error message based on the error  */}
+            {passwordInvalid.errorType === "short" ? (
+              <PasswordMsg $passwordInvalid={passwordInvalid}>
+                Please enter password that contain more than 6 characters.
+              </PasswordMsg>
+            ) : passwordInvalid.errorType === "wrong" ? (
+              <PasswordMsg $passwordInvalid={passwordInvalid}>
+                The email or password you entered is incorrect.
+              </PasswordMsg>
+            ) : null}
+
           </div>
           <Button
             variant="contained"
