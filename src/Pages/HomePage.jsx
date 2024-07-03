@@ -6,6 +6,7 @@ import {
 import { auth } from "../firebase";
 import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import DataTable from "../components/DataTable";
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -39,6 +40,7 @@ const HomePage = () => {
           Log out
         </Button>
       </ButtonContainer>
+      <DataTable />
     </>
   );
 };
