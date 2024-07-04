@@ -4,8 +4,11 @@ import LoginForm from "./components/LoginForm";
 import RegisterForm from "./components/RegisterForm";
 import HomePage from "./Pages/HomePage";
 import ProtectedRoute from "./Pages/ProtectedRoute";
+import { auth } from "./firebase";
 
 function App() {
+
+  console.log(auth.currentUser)
   //react router initialization
   const router = createBrowserRouter([
     {

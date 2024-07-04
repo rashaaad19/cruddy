@@ -1,3 +1,4 @@
+//functino to add aria roles to each table cell
 export function AddTableARIA() {
     try {
       let allTables = document.querySelectorAll('table');
