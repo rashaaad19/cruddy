@@ -13,13 +13,13 @@ export const Table = styled.table`
   }
   caption {
     text-align: left;
-    background: hsl(0 0% 95%);
+    background: hsl(0deg 0% 94.33%);
     font-size: 1.5rem;
     font-weight: 700;
     text-transform: uppercase;
   }
   th {
-    background: hsl(0 0% 95% / 0.9);
+    background: hsl(0 0% 92% / 0.9);
     text-align: start;
   }
   tr:nth-of-type(2n) {
@@ -30,8 +30,8 @@ export const Table = styled.table`
       display: none;
     }
     td {
-        display: grid;
-        grid-template-columns: 15ch auto;
+      display: grid;
+      grid-template-columns: 15ch auto;
       padding: 0.5rem 1rem;
     }
     td:first-child {

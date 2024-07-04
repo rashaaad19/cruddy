@@ -1,19 +1,31 @@
 import { useState, useEffect } from "react";
 import { Outlet, Navigate } from "react-router-dom";
 import { auth } from "../firebase";
+import { onAuthStateChanged } from "firebase/auth";
 
 const ProtectedRoute = () => {
   const [isAuth, setIsAuth] = useState(false); // Default to false until Firebase initializes
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      setIsAuth(!!user); // Update isAuth based on current authentication state
+    const listen = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        console.log(user);
+        setIsAuth(true);
+      } else {
+        setIsAuth(false);
+      }
+      setIsLoading(false);
     });
-
-    return () => unsubscribe(); // Clean up subscription on unmount
+    return () => {
+      listen();
+    };
   }, []);
 
-  // Check if user is authenticated and redirect accordingly
+  if (isLoading) {
+    return <h1>Loading...</h1>;
+  }
+
   return isAuth ? <Outlet /> : <Navigate to="/" />;
 };
 
