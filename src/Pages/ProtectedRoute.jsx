@@ -12,7 +12,6 @@ const ProtectedRoute = () => {
     onAuthStateChanged(auth, (user) => {
       //switching authentication state based on if user is logged in
       if (user) {
-        console.log(user);
         setIsAuth(true);
       } else {
         setIsAuth(false);

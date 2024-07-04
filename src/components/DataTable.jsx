@@ -1,8 +1,42 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { AddTableARIA } from "../utilties/tableRoles";
 import { Table } from "./Styled-Components/TableComponent";
+import { auth, db } from "../firebase";
+import { collection, doc, getDoc, getDocs } from "firebase/firestore";
 
 const DataTable = () => {
+  const [employeeArray, setEmployeeArray] = useState([]);
+  const collectionId = auth.currentUser.uid;
+
+  const docRef = doc(db, "users", collectionId);
+
+  const showData = async () => {
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists) {
+      const employeesRef = collection(docRef, "employees");
+      const querySnap = await getDocs(employeesRef);
+      if (querySnap.empty) {
+        console.log("no employees found");
+      }
+      {
+        const employeesData = querySnap.docs.map((doc) => doc.data());
+        setEmployeeArray(employeesData);
+      }
+    } else {
+      console.log("no user document");
+    }
+  };
+  useEffect(() => {
+    showData();
+  }, []);
+
+  console.log(collectionId);
+  employeeArray.length > 0 &&
+    console.log(employeeArray[0].data.map((data) => data));
+  employeeArray.length > 0 &&
+    employeeArray[0].data.map((data) => console.log(data));
+
   //running the function on the initial render
   useEffect(() => {
     AddTableARIA();
