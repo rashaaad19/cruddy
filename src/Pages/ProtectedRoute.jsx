@@ -7,21 +7,22 @@ const ProtectedRoute = () => {
   const [isAuth, setIsAuth] = useState(false); // Default to false until Firebase initializes
   const [isLoading, setIsLoading] = useState(true);
 
+  //adding effect to check authentication state
   useEffect(() => {
-    const listen = onAuthStateChanged(auth, (user) => {
+    onAuthStateChanged(auth, (user) => {
+      //switching authentication state based on if user is logged in
       if (user) {
         console.log(user);
         setIsAuth(true);
       } else {
         setIsAuth(false);
       }
+      //setting loading state to false after finishing authentication state checks
       setIsLoading(false);
     });
-    return () => {
-      listen();
-    };
   }, []);
 
+  //rendring loading text when loading
   if (isLoading) {
     return <h1>Loading...</h1>;
   }
