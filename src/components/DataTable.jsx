@@ -3,6 +3,7 @@ import { AddTableARIA } from "../utilties/tableRoles";
 import { Table } from "./Styled-Components/TableComponent";
 import { auth, db } from "../firebase";
 import { collection, doc, getDoc, getDocs } from "firebase/firestore";
+import { Link } from "react-router-dom";
 
 const DataTable = () => {
   const [employeeArray, setEmployeeArray] = useState([]);
@@ -72,7 +73,9 @@ const DataTable = () => {
               <td>{data.email}</td>
               <td>{data.salary}</td>
               <td>{data.date}</td>
-              <td>Edit | Delete</td>
+              <td>
+                <Link to={`edit/${data.id}`}>Edit</Link> | <button>Delete</button>
+              </td>
             </tr>
           ))}
       </tbody>

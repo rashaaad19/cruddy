@@ -4,9 +4,9 @@ import LoginForm from "./components/LoginForm";
 import RegisterForm from "./components/RegisterForm";
 import HomePage from "./Pages/HomePage";
 import ProtectedRoute from "./Pages/ProtectedRoute";
+import EditPage from "./Pages/EditPage";
 
 function App() {
-
   //react router initialization
   const router = createBrowserRouter([
     {
@@ -25,6 +25,16 @@ function App() {
         {
           index: true,
           element: <HomePage />,
+        },
+      ],
+    },
+    {
+      path: "home/edit/:id",
+      element: <ProtectedRoute />,
+      children: [
+        {
+          index: true,
+          element: <EditPage />,
         },
       ],
     },
