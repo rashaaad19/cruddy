@@ -5,14 +5,14 @@ import {
 } from "../components/Styled-Components/HomeComponents";
 import { auth } from "../firebase";
 import { signOut } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import DataTable from "../components/DataTable";
 
 const HomePage = () => {
   const navigate = useNavigate();
 
   const addEmployeeHandler = () => {
-    alert("Add Employee");
+    console.log("Add Employee");
   };
 
   const logoutHandler = async () => {
@@ -33,6 +33,8 @@ const HomePage = () => {
           variant="contained"
           color="secondary"
           onClick={addEmployeeHandler}
+          component={Link}
+          to="add-employee"
         >
           Add Employee
         </Button>

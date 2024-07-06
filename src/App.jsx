@@ -5,6 +5,7 @@ import RegisterForm from "./components/RegisterForm";
 import HomePage from "./Pages/HomePage";
 import ProtectedRoute from "./Pages/ProtectedRoute";
 import EditPage from "./Pages/EditPage";
+import AddPage from "./Pages/AddPage";
 
 function App() {
   //react router initialization
@@ -38,6 +39,17 @@ function App() {
         },
       ],
     },
+    {
+      path: "home/add-employee",
+      element: <ProtectedRoute />,
+      children: [
+        {
+          index: true,
+          element: <AddPage />,
+        },
+      ],
+    },
+   
   ]);
   return (
     <>
