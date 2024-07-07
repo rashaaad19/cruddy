@@ -21,13 +21,16 @@ export const FormHeader = styled.div`
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
-  align-items: center;
+  /* align-items: center; */
   width: min(100%, 35rem);
   margin: 0 auto;
   gap: 10px;
-  div {
+  /* div {
     width: 100%;
-  }
+  } */
+   .addEmployee-button{
+    align-self: center;
+   }
 `;
 export const PasswordMsg = styled.p`
   color: red;

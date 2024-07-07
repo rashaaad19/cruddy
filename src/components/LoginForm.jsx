@@ -14,6 +14,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { useDispatch } from "react-redux";
 import { userAuthActions } from "../store/userAuthSlice";
+import { userDataActions } from "../store/UserDataSlice";
 
 const LoginForm = () => {
   const [passwordInvalid, setPasswordInvalid] = useState({
@@ -52,10 +53,16 @@ const LoginForm = () => {
           userData.email,
           userData.password
         );
+        const uid = userCredential.user.uid;
+
         setUserData(userCredential.user);
 
         //Set Authentication to true
         dispatch(userAuthActions.setAuth(true));
+        //Update the email and id states
+        dispatch(
+          userDataActions.setUserData({ id: uid, email: userData.email })
+        );
         // Navigate to the home page after successful login
         navigate("/home");
       } catch (error) {
@@ -107,7 +114,6 @@ const LoginForm = () => {
                 The email or password you entered is incorrect.
               </PasswordMsg>
             ) : null}
-
           </div>
           <Button
             variant="contained"

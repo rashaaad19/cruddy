@@ -6,6 +6,8 @@ import HomePage from "./Pages/HomePage";
 import ProtectedRoute from "./Pages/ProtectedRoute";
 import EditPage from "./Pages/EditPage";
 import AddPage from "./Pages/AddPage";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs/AdapterDayjs";
 
 function App() {
   //react router initialization
@@ -49,11 +51,12 @@ function App() {
         },
       ],
     },
-   
   ]);
   return (
     <>
-      <RouterProvider router={router} />
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <RouterProvider router={router} />
+      </LocalizationProvider>
     </>
   );
 }

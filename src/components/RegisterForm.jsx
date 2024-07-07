@@ -12,6 +12,8 @@ import { auth, db } from "../firebase";
 
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { userDataActions } from "../store/UserDataSlice";
 
 //initializing reference to users collection
 const usersRef = collection(db, "users");
@@ -19,6 +21,8 @@ const usersRef = collection(db, "users");
 const RegisterForm = () => {
   const [passwordInvalid, setPasswordInvalid] = useState(false);
   const navigate = useNavigate();
+
+  const dispatch = useDispatch();
 
   const handleOnSubmit = async (event) => {
     // Extracting form data after submission
@@ -52,9 +56,14 @@ const RegisterForm = () => {
           email: userData.email,
           userID: uid,
         });
-        // Navigate to home page after signing up
-        navigate('/home')
 
+        //Update the email and id states
+        dispatch(
+          userDataActions.setUserData({ id: uid, email: userData.email })
+        );
+
+        // Navigate to home page after signing up
+        navigate("/home");
       } catch (error) {
         // Catching any errors
         console.log(error);
