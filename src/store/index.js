@@ -2,20 +2,20 @@ import { configureStore } from "@reduxjs/toolkit";
 import userAuthSlice from "./userAuthSlice";
 import userDataSlice from "./UserDataSlice";
 
-//Saving state to local storage
+//Saving state to session storage
 const saveState = (state) => {
   try {
     const serializedState = JSON.stringify(state);
-    localStorage.setItem("userData", serializedState);
+    sessionStorage.setItem("userData", serializedState);
   } catch (error) {
     console.log("Could not save the state", error);
   }
 };
 
-//Loading the state from local storage
+//Loading the state from session storage
 const loadState = () => {
   try {
-    const serializedState = localStorage.getItem("userData");
+    const serializedState = sessionStorage.getItem("userData");
 
     if (serializedState === null) {
       return undefined;
@@ -27,7 +27,7 @@ const loadState = () => {
   }
 };
 
-// Load persisted state from local storage
+// Load persisted state from session storage
 const persistedState = loadState();
 
 const store = configureStore({
@@ -40,9 +40,9 @@ const store = configureStore({
   },
 });
 
-// Subscribing to store changes and save state to local storage
+// Subscribing to store changes and save state to session storage
 store.subscribe(() => {
-  saveState(store.getState().userData.id);
+  saveState(store.getState().userData);
 });
 
 export default store;

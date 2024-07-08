@@ -20,8 +20,8 @@ const HomePage = () => {
       await signOut(auth);
       console.log("Sign out successful");
 
-      // Clear local storage
-      localStorage.removeItem("userData");
+      // Clear session storage
+      sessionStorage.removeItem("userData");
 
       //navigating back to the root page if logout is successful and preventing the user from returning with back button
       return navigate("/", { replace: true });
