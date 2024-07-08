@@ -6,33 +6,23 @@ import {
   FormHeader,
 } from "../components/Styled-Components/FormComponents";
 import { DatePicker } from "@mui/x-date-pickers";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, doc, setDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import { useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const AddPage = () => {
   const uid = useSelector((state) => state.userData.id);
+  const navigate = useNavigate();
+
   console.log(uid);
 
   const employeesRef = collection(db, "users", uid, "employees");
   console.log(employeesRef);
 
-  useEffect(() => {
-    const showCollection = async () => {
-      try {
-        const querySnap = await getDocs(employeesRef);
-        querySnap.forEach((doc) => {
-          console.log(doc.data());
-        });
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    showCollection();
-  }, []);
-  const handleOnSubmit = (event) => {
+  const handleOnSubmit = async (event) => {
     event.preventDefault();
+
     const data = new FormData(event.target);
     const employeeData = {
       firstName: data.get("firstName"),
@@ -42,7 +32,18 @@ const AddPage = () => {
       date: data.get("date"),
       id: data.get("id"),
     };
+
+    //adding new doc to the collection with the added employee id
+    await setDoc(doc(employeesRef, employeeData.id), {
+      date: employeeData.date,
+      email: employeeData.email,
+      firstName: employeeData.firstName,
+      lastName: employeeData.lastName,
+      id: employeeData.id,
+      salary: employeeData.salary,
+    });
     console.log(employeeData);
+    navigate("/home");
   };
   return (
     <>

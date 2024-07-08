@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { AddTableARIA } from "../utilties/tableRoles";
 import { Table } from "./Styled-Components/TableComponent";
 import { auth, db } from "../firebase";
@@ -7,19 +7,21 @@ import { Link } from "react-router-dom";
 
 const DataTable = () => {
   const [employeeArray, setEmployeeArray] = useState([]);
+  
 
   //extracting the user id for whom the collection will be added
   const userID = auth.currentUser.uid;
 
-  //accessing the user doc
+  //refrence to the document and collection
   const docRef = doc(db, "users", userID);
+  const employeesRef = collection(docRef, "employees");
 
-  const showData = async () => {
+  //wrapping function with useReducer to prevent to memorize the function
+  const showData = useCallback(async () => {
     const docSnap = await getDoc(docRef);
 
     //if the document exists, getting a snapchot for the employees collection inside it
     if (docSnap.exists) {
-      const employeesRef = collection(docRef, "employees");
       const querySnap = await getDocs(employeesRef);
       if (querySnap.empty) {
         console.log("no employees found");
@@ -32,22 +34,15 @@ const DataTable = () => {
     } else {
       console.log("no user document");
     }
-  };
+  }, [docRef, employeesRef]);
 
-  //Trigger the showData function when the component mounts for first time
+
+  //Trigger functions 
   useEffect(() => {
     showData();
-  });
-
-  // employeeArray.length > 0 &&
-  //   console.log(employeeArray[0].data.map((data) => data));
-  // employeeArray.length > 0 &&
-  //   employeeArray[0].data.map((data) => console.log(data));
-
-  //running the function on the initial render
-  useEffect(() => {
     AddTableARIA();
-  });
+  }, [showData]);
+
 
   return (
     <Table>
@@ -65,7 +60,7 @@ const DataTable = () => {
         {/* conditonally rendering the employees data if exists */}
 
         {employeeArray.length > 0 &&
-          employeeArray[0].data.map((data) => (
+          employeeArray.map((data) => (
             <tr key={data.id}>
               <td>{data.id}</td>
               <td>{data.firstName}</td>
@@ -74,7 +69,8 @@ const DataTable = () => {
               <td>{data.salary}</td>
               <td>{data.date}</td>
               <td>
-                <Link to={`edit/${data.id}`}>Edit</Link> | <button>Delete</button>
+                <Link to={`edit/${data.id}`}>Edit</Link> |{" "}
+                <button>Delete</button>
               </td>
             </tr>
           ))}

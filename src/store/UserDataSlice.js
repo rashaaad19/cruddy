@@ -12,6 +12,10 @@ const userDataSlice = createSlice({
       state.email = email;
       state.id = id;
     },
+    clearUserData(state) {
+      state.email = "default@email.com";
+      state.id = null;
+    },
   },
 });
 
