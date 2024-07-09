@@ -11,6 +11,12 @@ import { db } from "../firebase";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
+//number input props
+const inputProps = {
+  min: 1000,
+  max: 9999,
+};
+
 const AddPage = () => {
   const uid = useSelector((state) => state.userData.id);
   const navigate = useNavigate();
@@ -98,6 +104,7 @@ const AddPage = () => {
             color="info"
             fullWidth={true}
             id="outlined-required number"
+            inputProps={inputProps}
           />
           <DatePicker label="Date" name="date" />
           <Button

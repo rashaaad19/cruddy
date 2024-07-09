@@ -66,7 +66,7 @@ const DataTable = () => {
       <caption>Employees</caption>
       <tbody>
         <tr>
-          <th>No.</th>
+          <th>ID</th>
           <th>First Name</th>
           <th>Last Name</th>
           <th>Email</th>
