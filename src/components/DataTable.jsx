@@ -28,13 +28,11 @@ const DataTable = () => {
     //if the document exists, getting a snapchot for the employees collection inside it
     if (docSnap.exists) {
       const querySnap = await getDocs(employeesRef);
-      console.log(querySnap);
       if (querySnap.empty) {
         console.log("no employees found");
       } else {
         //mapping through the collection data and store it in EmployeesArray state
         const employeesData = querySnap.docs.map((doc) => doc.data());
-        console.log(employeesData);
         setEmployeeArray(employeesData);
       }
     } else {
@@ -54,7 +52,6 @@ const DataTable = () => {
     if (window.confirm("Are you sure you want to delete this employee?")) {
       const employeeDocRef = doc(employeesRef, id);
       await deleteDoc(employeeDocRef);
-      console.log("User ", id, " deleted");
       showData();
     } else {
       console.log("User delete action canceled.");

@@ -1,21 +1,8 @@
-import { Button, TextField } from "@mui/material";
-
-import {
-  Container,
-  Form,
-  FormHeader,
-} from "../components/Styled-Components/FormComponents";
-import { DatePicker } from "@mui/x-date-pickers";
 import { collection, doc, setDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-
-//number input props
-const inputProps = {
-  min: 1000,
-  max: 9999,
-};
+import EmployeeDataForm from "../components/EmployeeDataForm";
 
 const AddPage = () => {
   const uid = useSelector((state) => state.userData.id);
@@ -53,69 +40,7 @@ const AddPage = () => {
   };
   return (
     <>
-      <Container>
-        <FormHeader>
-          <h1>Add Employee</h1>
-          <p>Please enter the employee data</p>
-        </FormHeader>
-        <Form onSubmit={handleOnSubmit}>
-          <TextField
-            required
-            name="firstName"
-            type="text"
-            label="First Name"
-            color="info"
-            fullWidth={true}
-            id="outlined-required text"
-          />
-          <TextField
-            required
-            name="lastName"
-            type="text"
-            label="Last Name"
-            color="info"
-            fullWidth={true}
-            id="outlined-required text"
-          />
-          <TextField
-            required
-            name="email"
-            type="email"
-            label="Email"
-            color="info"
-            fullWidth={true}
-            id="outlined-required text"
-          />
-
-          <TextField
-            required
-            name="salary"
-            type="number"
-            label="Salary"
-            color="info"
-            fullWidth={true}
-            id="outlined-required number"
-          />
-          <TextField
-            required
-            name="id"
-            type="number"
-            label="Employee ID"
-            color="info"
-            fullWidth={true}
-            id="outlined-required number"
-            inputProps={inputProps}
-          />
-          <DatePicker label="Date" name="date" />
-          <Button
-            variant="contained"
-            className="addEmployee-button"
-            type="submit"
-          >
-            Add Employee
-          </Button>
-        </Form>
-      </Container>
+      <EmployeeDataForm handleSubmit={handleOnSubmit} formType="add" />
     </>
   );
 };

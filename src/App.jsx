@@ -32,7 +32,7 @@ function App() {
       ],
     },
     {
-      path: "home/edit/:id",
+      path: "home/edit/:employeeID",
       element: <ProtectedRoute />,
       children: [
         {
