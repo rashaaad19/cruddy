@@ -2,12 +2,17 @@ import { useCallback, useEffect, useState } from "react";
 import { AddTableARIA } from "../utilties/tableRoles";
 import { Table } from "./Styled-Components/TableComponent";
 import { auth, db } from "../firebase";
-import { collection, doc, getDoc, getDocs } from "firebase/firestore";
+import {
+  collection,
+  deleteDoc,
+  doc,
+  getDoc,
+  getDocs,
+} from "firebase/firestore";
 import { Link } from "react-router-dom";
 
 const DataTable = () => {
   const [employeeArray, setEmployeeArray] = useState([]);
-  
 
   //extracting the user id for whom the collection will be added
   const userID = auth.currentUser.uid;
@@ -23,12 +28,13 @@ const DataTable = () => {
     //if the document exists, getting a snapchot for the employees collection inside it
     if (docSnap.exists) {
       const querySnap = await getDocs(employeesRef);
+      console.log(querySnap);
       if (querySnap.empty) {
         console.log("no employees found");
-      }
-      {
+      } else {
         //mapping through the collection data and store it in EmployeesArray state
         const employeesData = querySnap.docs.map((doc) => doc.data());
+        console.log(employeesData);
         setEmployeeArray(employeesData);
       }
     } else {
@@ -36,13 +42,24 @@ const DataTable = () => {
     }
   }, [docRef, employeesRef]);
 
-
-  //Trigger functions 
+  // Trigger functions
   useEffect(() => {
     showData();
     AddTableARIA();
-  }, [showData]);
+  }, []);
 
+  //Delete handler
+
+  const deleteHandler = async (id) => {
+    if (window.confirm("Are you sure you want to delete this employee?")) {
+      const employeeDocRef = doc(employeesRef, id);
+      await deleteDoc(employeeDocRef);
+      console.log("User ", id, " deleted");
+      showData();
+    } else {
+      console.log("User delete action canceled.");
+    }
+  };
 
   return (
     <Table>
@@ -70,7 +87,13 @@ const DataTable = () => {
               <td>{data.date}</td>
               <td>
                 <Link to={`edit/${data.id}`}>Edit</Link> |{" "}
-                <button>Delete</button>
+                <button
+                  onClick={() => {
+                    deleteHandler(data.id);
+                  }}
+                >
+                  Delete
+                </button>
               </td>
             </tr>
           ))}
