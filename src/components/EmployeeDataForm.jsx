@@ -6,6 +6,7 @@ import {
   FormHeader,
 } from "../components/Styled-Components/FormComponents";
 import { DatePicker } from "@mui/x-date-pickers";
+import dayjs from "dayjs";
 
 //number input props
 const inputProps = {
@@ -17,11 +18,7 @@ const inputLapelProps = {
   shrink: true,
 };
 
-const selectedDate = new Date(2024, 6, 9); // Year, Month (0-indexed), Day
-
 const EmployeeDataForm = ({ handleSubmit, formType, employeeData }) => {
-    console.log(typeof(selectedDate), typeof(employeeData.date))
-  employeeData && console.log(employeeData.id);
   return (
     <Container>
       {formType === "add" ? (
@@ -44,10 +41,10 @@ const EmployeeDataForm = ({ handleSubmit, formType, employeeData }) => {
           color="info"
           fullWidth={true}
           id="outlined-required text"
-          placeholder={formType === "add" && "Enter employee first name"}
+          placeholder={formType === "add" ? "Enter employee first name" : ""}
           defaultValue={formType === "edit" ? employeeData.firstName : ""}
           //checking if employee data prop is defined before accessing it
-          key={employeeData ? employeeData.firstName : ""}
+          key={employeeData ? employeeData.firstName : undefined}
           InputLabelProps={formType === "edit" ? inputLapelProps : undefined}
         />
         <TextField
@@ -58,9 +55,9 @@ const EmployeeDataForm = ({ handleSubmit, formType, employeeData }) => {
           color="info"
           fullWidth={true}
           id="outlined-required text"
-          placeholder={formType === "add" && "Enter employee last name"}
+          placeholder={formType === "add" ? "Enter employee last name" : ""}
           defaultValue={formType === "edit" ? employeeData.lastName : ""}
-          key={employeeData ? employeeData.lastName : ""}
+          key={employeeData ? employeeData.lastName : undefined}
           InputLabelProps={formType === "edit" ? inputLapelProps : undefined}
         />
         <TextField
@@ -71,9 +68,9 @@ const EmployeeDataForm = ({ handleSubmit, formType, employeeData }) => {
           color="info"
           fullWidth={true}
           id="outlined-required text"
-          placeholder={formType === "add" && "Enter employee email"}
+          placeholder={formType === "add" ? "Enter employee email" : ""}
           defaultValue={formType === "edit" ? employeeData.email : ""}
-          key={employeeData ? employeeData.email : ""}
+          key={employeeData ? employeeData.email : undefined}
           InputLabelProps={formType === "edit" ? inputLapelProps : undefined}
         />
 
@@ -85,9 +82,9 @@ const EmployeeDataForm = ({ handleSubmit, formType, employeeData }) => {
           color="info"
           fullWidth={true}
           id="outlined-required number"
-          placeholder={formType === "add" && "Enter employee salary"}
+          placeholder={formType === "add" ? "Enter employee salary" : ""}
           defaultValue={formType === "edit" ? employeeData.salary : ""}
-          key={employeeData ? employeeData.salary : ""}
+          key={employeeData ? employeeData.salary : undefined}
           InputLabelProps={formType === "edit" ? inputLapelProps : undefined}
         />
         <TextField
@@ -99,17 +96,16 @@ const EmployeeDataForm = ({ handleSubmit, formType, employeeData }) => {
           fullWidth={true}
           id="outlined-required number"
           inputProps={inputProps}
-          placeholder={formType === "add" && "Enter employee id"}
+          placeholder={formType === "add" ? "Enter employee id" : ""}
           defaultValue={formType === "edit" ? employeeData.id : ""}
-          key={employeeData ? employeeData.id : ""}
+          key={employeeData ? employeeData.id : undefined}
           InputLabelProps={formType === "edit" ? inputLapelProps : undefined}
         />
         <DatePicker
           label="Date"
           name="date"
-        //   defaultValue={
-        //     formType === "edit" ? new Date(employeeData.date) : null
-        //   }
+          defaultValue={formType === "edit" ? dayjs(employeeData.date) : undefined}
+          key={employeeData ? employeeData.date : undefined}
         />
         <Button
           variant="contained"
