@@ -1,6 +1,9 @@
 import { useCallback, useEffect, useState } from "react";
-import { AddTableARIA } from "../utilties/tableRoles";
+import { Link } from "react-router-dom";
+
 import { Table } from "./Styled-Components/TableComponent";
+import { Button } from "@mui/material";
+
 import { auth, db } from "../firebase";
 import {
   collection,
@@ -9,12 +12,14 @@ import {
   getDoc,
   getDocs,
 } from "firebase/firestore";
-import { Link } from "react-router-dom";
-import { Button } from "@mui/material";
+
+import { AddTableARIA } from "../utilties/tableRoles";
+import { salaryFormater } from "../utilties/salaryFormater";
 
 const DataTable = () => {
   const [employeeArray, setEmployeeArray] = useState([]);
 
+  console.log(salaryFormater(50));
   //extracting the user id for whom the collection will be added
   const userID = auth.currentUser.uid;
 
@@ -81,7 +86,7 @@ const DataTable = () => {
               <td>{data.firstName}</td>
               <td>{data.lastName}</td>
               <td>{data.email}</td>
-              <td>{data.salary}</td>
+              <td>{salaryFormater(data.salary)}</td>
               <td>{data.date}</td>
               <td>
                 <div>

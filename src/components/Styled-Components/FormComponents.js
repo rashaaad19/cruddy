@@ -7,13 +7,13 @@ export const Container = styled.div`
 export const FormHeader = styled.div`
   text-align: center;
   h1 {
-    color: darkmagenta;
+    color: #811493;
   }
   p {
-    color: grey;
+    color: #B5A7B6;
   }
   a {
-    color: #b40db4;
+    color: #BE4BD1;
     font-weight: 500;
     text-decoration: none;
   }
@@ -21,13 +21,10 @@ export const FormHeader = styled.div`
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
-  /* align-items: center; */
   width: min(100%, 35rem);
   margin: 0 auto;
   gap: 10px;
-  /* div {
-    width: 100%;
-  } */
+
   .addEmployee-button {
     align-self: center;
   }

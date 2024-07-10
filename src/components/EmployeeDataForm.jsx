@@ -8,6 +8,7 @@ import {
 } from "../components/Styled-Components/FormComponents";
 import { DatePicker } from "@mui/x-date-pickers";
 import dayjs from "dayjs";
+import { useNavigate } from "react-router-dom";
 
 //number input props
 const inputProps = {
@@ -19,13 +20,26 @@ const inputLapelProps = {
   shrink: true,
 };
 
+//styles for the button container div
+const buttonContainerStyles = {
+  display: "flex",
+  justifyContent: "center",
+  gap: "10%",
+  marginTop: "1rem",
+};
+
 const EmployeeDataForm = ({
   handleSubmit,
   formType,
   employeeData,
   idError,
 }) => {
-  console.log(idError);
+  const navigate = useNavigate();
+
+  const handleOnBack = () => {
+    //navigate back to previous page
+    navigate(-1);
+  };
   return (
     <Container>
       {formType === "add" ? (
@@ -121,13 +135,20 @@ const EmployeeDataForm = ({
           }
           key={employeeData ? employeeData.date : undefined}
         />
-        <Button
-          variant="contained"
-          className="addEmployee-button"
-          type="submit"
-        >
-          {formType === "add" ? "Add Employee" : "Edit Employee"}
-        </Button>
+
+        <div style={buttonContainerStyles}>
+          <Button
+            variant="contained"
+            color="secondary"
+            className="addEmployee-button"
+            type="submit"
+          >
+            {formType === "add" ? "Add Employee" : "Edit Employee"}
+          </Button>
+          <Button variant="outlined" color="secondary" onClick={handleOnBack}>
+            Back
+          </Button>
+        </div>
       </Form>
     </Container>
   );

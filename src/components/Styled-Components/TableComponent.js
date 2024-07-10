@@ -11,19 +11,30 @@ export const Table = styled.table`
   td {
     padding: 1rem;
   }
+  td {
+    font-weight: 600;
+  }
+  th {
+    font-weight: 700;
+  }
   caption {
     text-align: left;
-    background: hsl(0deg 0% 94.33%);
+    background: #d371e4ab;
     font-size: 1.5rem;
     font-weight: 700;
     text-transform: uppercase;
+    color: #45094e;
   }
   th {
-    background: hsl(0 0% 92% / 0.9);
+    background: #d535e745;
     text-align: start;
+    color: #4f4350;
+  }
+  tr {
+    color: #240031;
   }
   tr:nth-of-type(2n) {
-    background: hsl(0 1% 95% / 0.7);
+    background: #b942c417;
   }
   @media (max-width: 650px) {
     th {
@@ -33,12 +44,6 @@ export const Table = styled.table`
       display: grid;
       grid-template-columns: 15ch auto;
       padding: 0.5rem 1rem;
-      /* button,
-      a {
-        grid-column: 2;
-        width: 50%;
-        margin-block: 5px;
-      } */
     }
     td:first-child {
       padding-top: 2rem;
@@ -51,7 +56,7 @@ export const Table = styled.table`
       text-transform: capitalize;
     }
     td:nth-of-type(1)::before {
-      content: "number";
+      content: "ID";
     }
     td:nth-of-type(2)::before {
       content: "first name";
