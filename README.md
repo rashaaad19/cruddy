@@ -1,6 +1,6 @@
 # cruddy
 <img align="right" src="https://img.shields.io/github/last-commit/rashaaad19/cruddy?style=plastic">
-Versatile CRUD (Create, Read, Update, Delete) application is built using React and Firebase , empowering you to manage data effectively for various business needs. 
+Versatile CRUD (Create, Read, Update, Delete) application is built using React and Firebase , empowering you to manage data effectively for various business needs and especially management systems. 
 
 **[demo here](https://cruddy.netlify.app/)**
 <hr/>
@@ -14,7 +14,7 @@ Versatile CRUD (Create, Read, Update, Delete) application is built using React a
 | **Responsive** | Works on various screen sizes |
 | **User Authentication** | Secure login and registration for users |
 | **Real-Time Updates** | Data changes are reflected instantly across all views |
-| **Data Managment** | Manage employee  details and  information |
+| **Data Management** | Manage employee  details and  information |
 <hr/>
 
 ## Technologies
@@ -42,8 +42,7 @@ Once you have Node.js and npm installed, you can install the project using these
 
 1. **Create Account** 
 2. **Once you move to home page, add your employee data** 
-3. **Through the home page you could logout,edit,delete or add new data** ![image](https://github.com/rashaaad19/cruddy/assets/58228482/30ebdb66-840a-4566-9b3c-425fa41ad261)
-
+3. **Through the home page you can control your employee data by adding new employees, editing existing employees information or delete employees**
 
 
 
