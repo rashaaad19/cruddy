@@ -28,13 +28,12 @@ export const Form = styled.form`
   /* div {
     width: 100%;
   } */
-   .addEmployee-button{
+  .addEmployee-button {
     align-self: center;
-   }
+  }
 `;
-export const PasswordMsg = styled.p`
+export const ErrorMsg = styled.p`
   color: red;
-  margin-block: 8px;
-  visibility: ${({ $passwordInvalid }) =>
-    $passwordInvalid ? "visible" : "hidden"}; // Dynamically set visibility: ;
+  visibility: ${({ $errorState }) =>
+    $errorState ? "visible" : "hidden"}; // Dynamically set visibility: ;
 `;

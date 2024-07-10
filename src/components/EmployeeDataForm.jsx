@@ -4,6 +4,7 @@ import {
   Container,
   Form,
   FormHeader,
+  ErrorMsg,
 } from "../components/Styled-Components/FormComponents";
 import { DatePicker } from "@mui/x-date-pickers";
 import dayjs from "dayjs";
@@ -18,7 +19,13 @@ const inputLapelProps = {
   shrink: true,
 };
 
-const EmployeeDataForm = ({ handleSubmit, formType, employeeData }) => {
+const EmployeeDataForm = ({
+  handleSubmit,
+  formType,
+  employeeData,
+  idError,
+}) => {
+  console.log(idError);
   return (
     <Container>
       {formType === "add" ? (
@@ -100,6 +107,12 @@ const EmployeeDataForm = ({ handleSubmit, formType, employeeData }) => {
             placeholder={"Enter employee id"}
           />
         )}
+        {idError === true && (
+          <ErrorMsg $errorState={idError}>
+            IDs must be unique please enter different ID.
+          </ErrorMsg>
+        )}
+
         <DatePicker
           label="Date"
           name="date"

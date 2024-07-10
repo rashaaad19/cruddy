@@ -3,7 +3,7 @@ import {
   Container,
   Form,
   FormHeader,
-  PasswordMsg,
+  ErrorMsg,
 } from "./Styled-Components/FormComponents";
 
 import { createUserWithEmailAndPassword } from "firebase/auth";
@@ -100,9 +100,9 @@ const RegisterForm = () => {
               fullWidth={true}
               error={passwordInvalid}
             />
-            <PasswordMsg $passwordInvalid={passwordInvalid}>
+            <ErrorMsg $errorState={passwordInvalid}>
               Please enter password that contain more than 6 characters.
-            </PasswordMsg>
+            </ErrorMsg>
           </div>
           <Button
             variant="contained"

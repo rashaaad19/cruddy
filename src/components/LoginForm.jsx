@@ -3,7 +3,7 @@ import {
   Container,
   FormHeader,
   Form,
-  PasswordMsg,
+  ErrorMsg,
 } from "./Styled-Components/FormComponents";
 
 import { signInWithEmailAndPassword } from "firebase/auth";
@@ -21,7 +21,7 @@ const LoginForm = () => {
     invalid: false,
     errorType: "",
   });
-  const [userData, setUserData] = useState(null);
+  const [userCred, setUserCred] = useState(null);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -55,7 +55,7 @@ const LoginForm = () => {
         );
         const uid = userCredential.user.uid;
 
-        setUserData(userCredential.user);
+        setUserCred(userCredential.user);
 
         //Set Authentication to true
         dispatch(userAuthActions.setAuth(true));
@@ -106,13 +106,13 @@ const LoginForm = () => {
 
             {/* conditionally rendring the error message based on the error  */}
             {passwordInvalid.errorType === "short" ? (
-              <PasswordMsg $passwordInvalid={passwordInvalid}>
+              <ErrorMsg $errorState={passwordInvalid}>
                 Please enter password that contain more than 6 characters.
-              </PasswordMsg>
+              </ErrorMsg>
             ) : passwordInvalid.errorType === "wrong" ? (
-              <PasswordMsg $passwordInvalid={passwordInvalid}>
+              <ErrorMsg $errorState={passwordInvalid}>
                 The email or password you entered is incorrect.
-              </PasswordMsg>
+              </ErrorMsg>
             ) : null}
           </div>
           <Button
