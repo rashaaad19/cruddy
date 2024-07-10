@@ -33,6 +33,12 @@ export const Table = styled.table`
       display: grid;
       grid-template-columns: 15ch auto;
       padding: 0.5rem 1rem;
+      /* button,
+      a {
+        grid-column: 2;
+        width: 50%;
+        margin-block: 5px;
+      } */
     }
     td:first-child {
       padding-top: 2rem;

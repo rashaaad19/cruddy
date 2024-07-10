@@ -1,17 +1,15 @@
-import { collection, doc, setDoc } from "firebase/firestore";
+import { collection, doc, getDocs, setDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import EmployeeDataForm from "../components/EmployeeDataForm";
+import { useEffect } from "react";
 
 const AddPage = () => {
   const uid = useSelector((state) => state.userData.id);
   const navigate = useNavigate();
 
-  console.log(uid);
-
   const employeesRef = collection(db, "users", uid, "employees");
-  console.log(employeesRef);
 
   const handleOnSubmit = async (event) => {
     event.preventDefault();
@@ -35,9 +33,18 @@ const AddPage = () => {
       id: employeeData.id,
       salary: employeeData.salary,
     });
-    console.log(employeeData);
     navigate("/home");
   };
+
+  useEffect(() => {
+    const showData = async () => {
+      const querySnap = await getDocs(employeesRef);
+      querySnap.forEach((doc) => {
+        console.log(doc.id, " => ", doc.data());
+      });
+    };
+    showData();
+  }, []);
   return (
     <>
       <EmployeeDataForm handleSubmit={handleOnSubmit} formType="add" />

@@ -22,7 +22,6 @@ const EditPage = () => {
       email: data.get("email"),
       salary: data.get("salary"),
       date: data.get("date"),
-      id: data.get("id"),
     };
 
     //updating the document in firestore
@@ -35,6 +34,7 @@ const EditPage = () => {
     }
   };
 
+  //Retriving employee data from firestore in first render
   useEffect(() => {
     const showData = async () => {
       const docSnap = await getDoc(employeeRef);

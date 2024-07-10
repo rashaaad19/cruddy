@@ -10,6 +10,7 @@ import {
   getDocs,
 } from "firebase/firestore";
 import { Link } from "react-router-dom";
+import { Button } from "@mui/material";
 
 const DataTable = () => {
   const [employeeArray, setEmployeeArray] = useState([]);
@@ -83,14 +84,26 @@ const DataTable = () => {
               <td>{data.salary}</td>
               <td>{data.date}</td>
               <td>
-                <Link to={`edit/${data.id}`}>Edit</Link> |{" "}
-                <button
-                  onClick={() => {
-                    deleteHandler(data.id);
-                  }}
-                >
-                  Delete
-                </button>
+                <div>
+                  <Button
+                    component={Link}
+                    to={`edit/${data.id}`}
+                    variant="outlined"
+                    color="secondary"
+                  >
+                    Edit
+                  </Button>{" "}
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    size="small"
+                    onClick={() => {
+                      deleteHandler(data.id);
+                    }}
+                  >
+                    Delete
+                  </Button>
+                </div>
               </td>
             </tr>
           ))}

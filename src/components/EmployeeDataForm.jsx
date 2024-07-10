@@ -87,24 +87,25 @@ const EmployeeDataForm = ({ handleSubmit, formType, employeeData }) => {
           key={employeeData ? employeeData.salary : undefined}
           InputLabelProps={formType === "edit" ? inputLapelProps : undefined}
         />
-        <TextField
-          required
-          name="id"
-          type="number"
-          label="Employee ID"
-          color="info"
-          fullWidth={true}
-          id="outlined-required number"
-          inputProps={inputProps}
-          placeholder={formType === "add" ? "Enter employee id" : ""}
-          defaultValue={formType === "edit" ? employeeData.id : ""}
-          key={employeeData ? employeeData.id : undefined}
-          InputLabelProps={formType === "edit" ? inputLapelProps : undefined}
-        />
+        {formType === "add" && (
+          <TextField
+            required
+            name="id"
+            type="number"
+            label="Employee ID"
+            color="info"
+            fullWidth={true}
+            id="outlined-required number"
+            inputProps={inputProps}
+            placeholder={"Enter employee id"}
+          />
+        )}
         <DatePicker
           label="Date"
           name="date"
-          defaultValue={formType === "edit" ? dayjs(employeeData.date) : undefined}
+          defaultValue={
+            formType === "edit" ? dayjs(employeeData.date) : undefined
+          }
           key={employeeData ? employeeData.date : undefined}
         />
         <Button
