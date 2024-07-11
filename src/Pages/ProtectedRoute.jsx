@@ -2,6 +2,14 @@ import { useState, useEffect } from "react";
 import { Outlet, Navigate } from "react-router-dom";
 import { auth } from "../firebase";
 import { onAuthStateChanged } from "firebase/auth";
+import { ClimbingBoxLoader, MoonLoader, ScaleLoader } from "react-spinners";
+
+const loaderWrapper={
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  height: "100vh",
+}
 
 const ProtectedRoute = () => {
   const [isAuth, setIsAuth] = useState(false); // Default to false until Firebase initializes
@@ -23,7 +31,13 @@ const ProtectedRoute = () => {
 
   //rendring loading text when loading
   if (isLoading) {
-    return <h1>Loading...</h1>;
+    return (
+      <div
+        style={loaderWrapper}
+      >
+        <ScaleLoader color="#811493"/>
+      </div>
+    );
   }
 
   return isAuth ? <Outlet /> : <Navigate to="/" />;
