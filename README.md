@@ -33,7 +33,7 @@ To get started with this project, make sure you have Node.js and npm installed o
 <br/>
 Once you have Node.js and npm installed, you can install the project using these commands:
 ```bash
-1. Clone the repo to your machine git clone `https://github.com/rashaaad19/Flavor-s-food`
+1. Clone the repo to your machine git clone `https://github.com/rashaaad19/cruddy.git`
 2. npm install
 3. npm start
 ```
