@@ -21,7 +21,6 @@ const LoginForm = () => {
     invalid: false,
     errorType: "",
   });
-  const [userCred, setUserCred] = useState(null);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -55,7 +54,6 @@ const LoginForm = () => {
         );
         const uid = userCredential.user.uid;
 
-        setUserCred(userCredential.user);
 
         //Set Authentication to true
         dispatch(userAuthActions.setAuth(true));
@@ -79,7 +77,7 @@ const LoginForm = () => {
         <FormHeader>
           <h1>Sign In</h1>
           <p>
-            Dosn&lsquo;t have an account ? <Link to="register">Sign Up</Link>
+            Don&lsquo;t have an account ? <Link to="register">Sign Up</Link>
           </p>
         </FormHeader>
         <Form onSubmit={handleOnSubmit}>

@@ -8,12 +8,14 @@ import EditPage from "./Pages/EditPage";
 import AddPage from "./Pages/AddPage";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs/AdapterDayjs";
+import ErrorPage from "./Pages/ErrorPage";
 
 function App() {
   //react router initialization
   const router = createBrowserRouter([
     {
       path: "/",
+      errorElement: <ErrorPage />,
       element: <LoginForm />,
     },
     {
