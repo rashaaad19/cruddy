@@ -85,6 +85,7 @@ const DataTable = () => {
             <td
               colSpan="7"
               style={{ display: "flex", justifyContent: "center" }}
+              id="loadingCell"
             >
               {" "}
               <MoonLoader color="#811493" />

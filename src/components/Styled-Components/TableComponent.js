@@ -55,6 +55,13 @@ export const Table = styled.table`
       font-weight: 700;
       text-transform: capitalize;
     }
+    
+    //override content before the loading spinner
+    #loadingCell::before{
+      content:none
+    }
+
+    
     td:nth-of-type(1)::before {
       content: "ID";
     }
