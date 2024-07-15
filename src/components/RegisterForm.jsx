@@ -76,7 +76,7 @@ const RegisterForm = () => {
         <FormHeader>
           <h1>Sign Up</h1>
           <p>
-            Already have an account ? <Link to="/">Sign In</Link>
+            Already have an account ? <Link to="/login">Sign In</Link>
           </p>
         </FormHeader>
         <Form onSubmit={handleOnSubmit}>

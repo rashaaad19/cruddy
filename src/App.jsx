@@ -9,6 +9,9 @@ import AddPage from "./Pages/AddPage";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs/AdapterDayjs";
 import ErrorPage from "./Pages/ErrorPage";
+import MainPage from "./Pages/MainPage";
+import { ThemeProvider } from "@mui/material";
+import { theme } from "./components/Styled-Components/themeProvider";
 
 function App() {
   //react router initialization
@@ -16,6 +19,10 @@ function App() {
     {
       path: "/",
       errorElement: <ErrorPage />,
+      element: <MainPage />,
+    },
+    {
+      path: "login",
       element: <LoginForm />,
     },
     {
@@ -57,7 +64,9 @@ function App() {
   return (
     <>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <RouterProvider router={router} />
+        <ThemeProvider theme={theme}>
+          <RouterProvider router={router} />
+        </ThemeProvider>
       </LocalizationProvider>
     </>
   );

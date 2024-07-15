@@ -77,7 +77,7 @@ const LoginForm = () => {
         <FormHeader>
           <h1>Sign In</h1>
           <p>
-            Don&lsquo;t have an account ? <Link to="register">Sign Up</Link>
+            Don&lsquo;t have an account ? <Link to="/register">Sign Up</Link>
           </p>
         </FormHeader>
         <Form onSubmit={handleOnSubmit}>
