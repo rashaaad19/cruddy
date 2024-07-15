@@ -9,6 +9,6 @@ export const theme = createTheme({
     apple: createColor('#5DBA40'),
     steelBlue: createColor('#5C76B7'),
     violet: createColor('#BC00A3'),
-    gray:createColor('#808080')
+    gray:createColor('#FF78FA')
   },
 });

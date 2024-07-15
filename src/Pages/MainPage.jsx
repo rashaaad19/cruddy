@@ -32,8 +32,8 @@ const MainPage = () => {
           <Button
             component={Link}
             to="/register"
-            variant="contained"
-            color="gray"
+            variant="outlined"
+            color="secondary"
           >
             Create Account
           </Button>

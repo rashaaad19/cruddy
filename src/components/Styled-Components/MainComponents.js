@@ -1,25 +1,10 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-
-@media (min-width: 900px) {
-    display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  height: 100vh;
-  align-items: center;
-  .heroText span{
-    font-size:4rem;
-    grid-column: 1 / 2;
-  }
-  .actionContainer{
-    grid-column: 2 / 3;
-    border-radius: 25px;
-  }
-}
-  
-.heroText{
+  .heroText {
     height: 15rem;
-}
+  }
+
   .heroText span {
     font-size: 3em;
     color: #7b1fa2;
@@ -31,24 +16,52 @@ export const Container = styled.div`
     display: flex;
     flex-direction: column;
     justify-self: center;
-    gap: 25px;
     height: 500px;
     background: #d6bee126;
-    padding: 2rem 4rem;
-    justify-content: flex-start;
+    justify-content: center;
+
+    padding: 1rem 4rem;
   }
-  .buttonContainer{
+  .buttonContainer {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    padding-top: 8rem;
+    padding-top: 4rem;
   }
-  h1{
+  h1 {
     font-size: 30px;
     font-weight: 600;
     text-transform: uppercase;
-    color:#811493;
+    color: #811493;
     font-family: sans-serif;
     text-align: center;
+  }
+
+  @media (min-width: 900px) {
+    padding-inline: 3rem;
+    display: grid;
+    grid-template-columns: 60% 40%;
+    height: 100vh;
+    align-items: center;
+    .heroText span {
+      font-size: 4rem;
+      grid-column: 1 / 2;
+    }
+    .actionContainer {
+      grid-column: 2 / 3;
+      border-radius: 25px;
+      padding: 2rem 4rem;
+      justify-content: flex-start;
+      gap: 25px;
+    }
+    .buttonContainer {
+      padding-top: 8rem;
+    }
+  }
+
+  @media (min-width: 426px) and (max-width: 769px) {
+    .heroText {
+      height: 12rem;
+    }
   }
 `;
